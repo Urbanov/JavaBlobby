@@ -12,7 +12,6 @@ public class Blob extends Movable implements Controllable {
     public final static int LEFT_SPAWN = 2000;
     public final static int RIGHT_SPAWN = 4500;
 
-    public final static int TOP_COLLISION = 340;
     public final static int HORIZONTAL_MOVE_DELTA = 45;
     public final static int JUMP_VELOCITY = 200;
     public final static int GRAVITY = 8;
@@ -61,27 +60,15 @@ public class Blob extends Movable implements Controllable {
 
     @Override
     public void moveLeft() {
-        //position.x -= HORIZONTAL_MOVE_DELTA;
-        velocity.x = -HORIZONTAL_MOVE_DELTA;
+        position.x -= HORIZONTAL_MOVE_DELTA;
     }
 
     @Override
     public void moveRight() {
-        //position.x += HORIZONTAL_MOVE_DELTA;
-        velocity.x = HORIZONTAL_MOVE_DELTA;
+        position.x += HORIZONTAL_MOVE_DELTA;
     }
 
-    public void resetHorizontalMovement() {
-        velocity.x = 0;
-    }
-
-    //@Override
     public void update() {
-        /*position.x += velocity.x;
-        position.y += velocity.y;
-        if (position.y > 0) {
-            velocity.y -= GRAVITY;
-        }*/
         super.update(GRAVITY);
     }
 

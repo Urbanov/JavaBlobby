@@ -39,7 +39,6 @@ public class Player {
     }
 
     public void move() {
-        blob.resetHorizontalMovement();
         if (input.up()) {
             blob.moveUp();
         }
@@ -51,4 +50,3 @@ public class Player {
         }
     }
 }
-

@@ -61,9 +61,6 @@ public class World {
     }
 
     public void tick() {
-        //if (!ball.isWaiting()) {
-
-        //}
         ball.update();
 
         players.forEach(player -> {
@@ -73,9 +70,6 @@ public class World {
             ball.checkCollision(player.getBlob());
         });
 
-        /*ball.checkCollision(getRightPlayer().getBlob());
-        ball.checkCollision(getLeftPlayer().getBlob());*/
-        //players.forEach(player -> ball.checkCollision(player.getBlob()));
         ball.checkCollision(net);
         ball.checkCollision(court);
 
