@@ -9,26 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Renderer {
-    private List<Sprite> sprites;
-    private BallMarker marker;
+    private List<Drawable> drawables;
     private GraphicsContext gc;
 
     public Renderer(GraphicsContext gc) {
-        sprites = new ArrayList<>();
+        drawables = new ArrayList<>();
         this.gc = gc;
     }
 
     public void register(World world) {
-        sprites.add(new Sprite(world.getBall(), new Image("ball.png")));
-        sprites.add(new Sprite(world.getRightPlayer().getBlob(), new Image("red_blob.png")));
-        sprites.add(new Sprite(world.getLeftPlayer().getBlob(), new Image("blue_blob.png")));
-
-        marker = new BallMarker(world.getBall());
+        drawables.add(new BallMarker(world.getBall()));
+        drawables.add(new Sprite(world.getBall(), new Image("ball.png")));
+        drawables.add(new Sprite(world.getRightPlayer().getBlob(), new Image("red_blob.png")));
+        drawables.add(new Sprite(world.getLeftPlayer().getBlob(), new Image("blue_blob.png")));
+        drawables.add(new Scores(world.getLeftPlayer(), world.getRightPlayer()));
     }
 
-    public void draw() {
+    public void render() {
         gc.clearRect(0, 0, GameScene.WIDTH,GameScene.HEIGHT);
-        marker.render(gc);
-        sprites.forEach(sprite -> sprite.render(gc));
+        drawables.forEach(drawable -> drawable.render(gc));
     }
 }

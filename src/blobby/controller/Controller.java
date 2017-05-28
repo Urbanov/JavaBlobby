@@ -1,6 +1,8 @@
 package blobby.controller;
 
+import blobby.game.Player;
 import blobby.game.World;
+import blobby.graphics.GameOverScene;
 import blobby.graphics.GameScene;
 import blobby.graphics.MenuScene;
 import blobby.graphics.Renderer;
@@ -26,27 +28,29 @@ public class Controller extends AnimationTimer {
         stage.sizeToScene();
     }
 
-    public void startHumanGame() {
-        initializeGame();
-        manager.register(new KeyboardInput(world.getLeftPlayer(), KeyCode.W, KeyCode.A, KeyCode.D));
-        this.start();
-    }
-
-    public void startBotGame() {
-        initializeGame();
-        manager.register(new BotInput(world.getLeftPlayer(), world.getBall()));
-        this.start();
-    }
-
-    public void initializeGame() {
+    public void initializeGame(boolean bot) {
         GameScene scene = new GameScene();
         stage.setScene(scene.getScene());
         stage.sizeToScene();
-        renderer = new Renderer(scene.getGraphicsContext());
         world = new World();
+        renderer = new Renderer(scene.getGraphicsContext());
         renderer.register(world);
         manager = new InputManager(scene.getScene());
         manager.register(new KeyboardInput(world.getRightPlayer(), KeyCode.UP, KeyCode.LEFT, KeyCode.RIGHT));
+        if (bot) {
+            manager.register(new BotInput(world.getLeftPlayer(), world.getBall()));
+        }
+        else {
+            manager.register(new KeyboardInput(world.getLeftPlayer(), KeyCode.W, KeyCode.A, KeyCode.D));
+        }
+        start();
+    }
+
+    public void showEnd(Player winner) {
+        stop();
+        GameOverScene scene = new GameOverScene(winner, this);
+        stage.setScene(scene.getScene());
+        stage.sizeToScene();
     }
 
     @Override
@@ -57,18 +61,17 @@ public class Controller extends AnimationTimer {
     }
 
     @Override
-    public void stop() {
-        super.stop();
-    }
-
-    @Override
     public void handle(long now) {
         manager.update();
         world.tick();
-        renderer.draw();
+        renderer.render();
 
         if (!world.isRunning()) {
-            stop();
+            showEnd(world.getWinner());
         }
+    }
+
+    public static int translate(int position) {
+        return (position + 5) / 10;
     }
 }

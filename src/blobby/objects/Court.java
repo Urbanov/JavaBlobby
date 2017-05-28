@@ -8,7 +8,12 @@ public class Court extends GameObject {
     public final static int MAX = MIN + WIDTH;
 
     public enum Side {
-        LEFT, RIGHT
+        LEFT, RIGHT;
+
+        @Override
+        public String toString() {
+            return super.toString().substring(0, 1) + super.toString().substring(1).toLowerCase();
+        }
     }
 
     public Court() {

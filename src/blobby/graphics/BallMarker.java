@@ -1,9 +1,10 @@
 package blobby.graphics;
 
+import blobby.controller.Controller;
 import blobby.objects.Ball;
 import javafx.scene.canvas.GraphicsContext;
 
-public class BallMarker {
+public class BallMarker implements Drawable {
     public final static int SIZE = 6;
 
     private Ball ball;
@@ -12,7 +13,8 @@ public class BallMarker {
         this.ball = ball;
     }
 
+    @Override
     public void render(GraphicsContext gc) {
-        gc.fillRect((ball.getCenter().x + 5) / 10 - SIZE / 2, SIZE, SIZE, SIZE);
+        gc.fillRect(Controller.translate(ball.getCenter().x) - SIZE / 2, SIZE, SIZE, SIZE);
     }
 }

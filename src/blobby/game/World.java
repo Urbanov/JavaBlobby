@@ -44,6 +44,13 @@ public class World {
         return players.get(1);
     }
 
+    public Player getWinner() {
+        if (getLeftPlayer().getScore() > getRightPlayer().getScore()) {
+            return getLeftPlayer();
+        }
+        return getRightPlayer();
+    }
+
     public Ball getBall() {
         return ball;
     }

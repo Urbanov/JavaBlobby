@@ -19,24 +19,15 @@ public class InputManager {
 
     public void listen() {
         scene.setOnKeyPressed(event -> {
-            /*inputs.stream()
-                .filter(input -> input instanceof KeyboardInput)
-                .forEach(input -> input.pressed(event.getCode()));*/
             inputs.forEach(input -> input.pressed(event.getCode()));
         });
 
         scene.setOnKeyReleased(event -> {
-            /*inputs.stream()
-                .filter(input -> input instanceof KeyboardInput)
-                .forEach(input -> input.released(event.getCode()));*/
             inputs.forEach(input -> input.released(event.getCode()));
         });
     }
 
     public void update() {
-        /*inputs.stream()
-            .filter(input -> input instanceof BotInput)
-            .forEach(input -> input.update());*/
-        inputs.forEach(Input::update);
+        inputs.forEach(input -> input.update());
     }
 }
