@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.text.TextAlignment;
 
 public class Scores implements Drawable {
-    public static int MARGIN = 30;
+    public final static int MARGIN = 30;
 
     private Player left;
     private Player right;

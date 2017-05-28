@@ -20,6 +20,7 @@ public class GameScene extends SceneObject {
         Group root = new Group();
         scene = new Scene(root);
 
+        // set up canvas for rendering
         Canvas canvas = new Canvas(WIDTH, HEIGHT);
         gc = canvas.getGraphicsContext2D();
         gc.setFont(Font.font("Roboto", 60));

@@ -8,6 +8,7 @@ public class Blob extends Movable implements Controllable {
     public final static int TOP_RADIUS = 250;
     public final static int CENTER_DIFF = 310;
 
+    //FIXME
     public final static int VERTICAL_SPAWN = 0;
     public final static int LEFT_SPAWN = 2000;
     public final static int RIGHT_SPAWN = 4500;

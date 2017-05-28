@@ -5,9 +5,11 @@ import blobby.utils.Vector;
 public class Ball extends Movable implements Collidable {
     public final static int RADIUS = 315;
 
+    //FIXME
     public final static int VERTICAL_SPAWN = 2000;
     public final static int LEFT_SPAWN = 2000;
     public final static int RIGHT_SPAWN = 7000;
+    public final static int DEFAULT_SPAWN = RIGHT_SPAWN;
 
     public final static int MAX_HITS = 3;
     public final static int GRAVITY = 3;
@@ -26,17 +28,10 @@ public class Ball extends Movable implements Collidable {
     private int squeeze;
 
     public Ball() {
-        //super(RIGHT_SPAWN, VERTICAL_SPAWN, RADIUS*2, RADIUS*2);
-        super(5500, 2000, RADIUS*2, RADIUS*2);
+        super(DEFAULT_SPAWN, VERTICAL_SPAWN, RADIUS*2, RADIUS*2);
         waiting = true;
         valid = true;
         squeeze = 0;
-
-
-        //FIXME: debug
-        //waiting = false;
-        /*velocity.y = 50;
-        velocity.x = -150;*/
     }
 
     public boolean isValid() {

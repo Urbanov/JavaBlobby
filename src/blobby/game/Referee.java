@@ -3,6 +3,7 @@ package blobby.game;
 import blobby.objects.Court;
 
 public class Referee {
+    //FIXME
     public final static int WIN_POINTS = 3;
     public final static int WIN_DIFF = 2;
 
@@ -15,15 +16,12 @@ public class Referee {
         ready = true;
     }
 
-    public void ready() {
-        ready = true;
-    }
-
     public void work() {
         if (ready) {
             score();
         }
-        if (world.getBall().onGround() && world.getLeftPlayer().getBlob().onGround() && world.getRightPlayer().getBlob().onGround()) {
+        if (world.getBall().onGround() && world.getLeftPlayer().getBlob().onGround() &&
+            world.getRightPlayer().getBlob().onGround()) {
             if (!checkEnd()) {
                 nextRound();
             }
