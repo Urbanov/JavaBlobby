@@ -17,7 +17,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Scene shown after the game ends
+ */
 public class GameOverScene extends GameScene {
+    /**
+     * Creates new scene
+     * @param winner {@link Player} who won the match
+     * @param controller reference to {@link Controller}, which owns the stage
+     */
     public GameOverScene(Player winner, Controller controller) {
         // grid
         Group root = new Group();

@@ -9,13 +9,28 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+/**
+ * Scene used for rendering graphics during game
+ */
 public class GameScene extends SceneObject {
+    /**
+     * Width of the canvas
+     */
     public final static int WIDTH = 800;
+    /**
+     * Height of the canvas
+     */
     public final static int HEIGHT = 600;
+    /**
+     * Ground level for rendering
+     */
     public final static int GROUND_LEVEL = 50;
 
     private GraphicsContext gc;
 
+    /**
+     * Creates new scene
+     */
     public GameScene() {
         Group root = new Group();
         scene = new Scene(root);
@@ -31,6 +46,11 @@ public class GameScene extends SceneObject {
         root.getChildren().addAll(background, canvas);
     }
 
+    /**
+     * Returns {@link GraphicsContext} associated with the scene
+     *
+     * @return GraphicsContext object
+     */
     public GraphicsContext getGraphicsContext() {
         return gc;
     }

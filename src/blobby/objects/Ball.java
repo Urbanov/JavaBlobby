@@ -2,23 +2,73 @@ package blobby.objects;
 
 import blobby.utils.Vector;
 
+/**
+ * Class representing a ball
+ */
 public class Ball extends Movable implements Collidable {
+    /**
+     * Radius of the ball
+     */
     public final static int RADIUS = 315;
 
-    //FIXME
+    /**
+     * Where to spawn the ball vertically
+     */
     public final static int VERTICAL_SPAWN = 2000;
-    public final static int LEFT_SPAWN = 2000;
-    public final static int RIGHT_SPAWN = 7000;
+
+    /**
+     * Where to spawn the ball horizontally on the left court
+     */
+    public final static int LEFT_SPAWN = Court.WIDTH / 4 - RADIUS;
+
+    /**
+     * Where to spawn the ball horizontally on the right court
+     */
+    public final static int RIGHT_SPAWN = Court.WIDTH * 3 / 4 - RADIUS;
+
+    /**
+     * Where the ball spawns right after starting the game
+     */
     public final static int DEFAULT_SPAWN = RIGHT_SPAWN;
 
+    /**
+     * Maximum hit count between blob and ball before losing the round
+     */
     public final static int MAX_HITS = 3;
+
+    /**
+     * Gravity value
+     */
     public final static int GRAVITY = 3;
+
+    /**
+     * Reduces velocity of the ball after any player scores
+     */
     public final static double DAMP = 0.45;
+
+    /**
+     * Speed up the ball horizontally
+     */
     public final static double BUFF = 1.1;
+
+    /**
+     * How much of blob's veclocity is passed to ball after collision
+     */
     public final static double BLOB_VELOCITY_FACTOR = 0.15;
+
+    /**
+     * Default length of ball velocity vector after a collision with blob
+     */
     public final static int BOUNCE = 125;
+
+    /**
+     * Minimal vertical velocity after a collision with blob
+     */
     public final static int MINIMAL_VELOCITY = 40;
 
+    /**
+     * Number of frames, where additional hits are not counted
+     */
     public final int SQUEEZE = 10;
 
     private boolean valid;
@@ -27,6 +77,9 @@ public class Ball extends Movable implements Collidable {
     private int hits;
     private int squeeze;
 
+    /**
+     * Creates new ball
+     */
     public Ball() {
         super(DEFAULT_SPAWN, VERTICAL_SPAWN, RADIUS*2, RADIUS*2);
         waiting = true;
@@ -34,14 +87,29 @@ public class Ball extends Movable implements Collidable {
         squeeze = 0;
     }
 
+    /**
+     * Checks whether any player scored this round
+     *
+     * @return logical value
+     */
     public boolean isValid() {
         return valid;
     }
 
+    /**
+     * Checks whether ball is waiting for a serve
+     *
+     * @return logical value
+     */
     public boolean isWaiting() {
         return waiting;
     }
 
+    /**
+     * Reset ball to default position
+     *
+     * @param side side of the court
+     */
     public void reset(Court.Side side) {
         valid = true;
         waiting = true;
@@ -50,6 +118,12 @@ public class Ball extends Movable implements Collidable {
         setPosition(side == Court.Side.LEFT ? LEFT_SPAWN : RIGHT_SPAWN, VERTICAL_SPAWN);
     }
 
+    /**
+     * Registers hit by a blob
+     *
+     * @param blob reference to blob
+     * @return true if player exceeded hit limit
+     */
     private boolean hit(Blob blob) {
         if (squeeze != 0) {
             return false;
@@ -69,10 +143,18 @@ public class Ball extends Movable implements Collidable {
         return false;
     }
 
+    /**
+     * Called when one of players scores
+     */
     private void hit() {
         valid = false;
     }
 
+    /**
+     * Checks collision with {@link Blob} and updates position and velocity values accordingly
+     *
+     * @param blob object to check collision
+     */
     @Override
     public void checkCollision(Blob blob) {
         // ball is invalid, no collision
@@ -150,12 +232,17 @@ public class Ball extends Movable implements Collidable {
                 update();
             }
             else if (position.x >= Net.MIN - width && position.x <= Net.MAX) {
-                position.y = blob.maxY();
+                position.y = blob.maxY() > Net.HEIGHT ? Net.HEIGHT : blob.maxY();
                 update();
             }
         }
     }
 
+    /**
+     * Checks collision with {@link Net} and updates position and velocity values accordingly
+     *
+     * @param net object to check collision
+     */
     @Override
     public void checkCollision(Net net) {
         // bottom rectangular part
@@ -194,6 +281,11 @@ public class Ball extends Movable implements Collidable {
         }
     }
 
+    /**
+     * Checks collision with {@link Court} and updates position and velocity values accordingly
+     *
+     * @param court object to check collision
+     */
     @Override
     public void checkCollision(Court court) {
         // vertical check
@@ -219,6 +311,9 @@ public class Ball extends Movable implements Collidable {
         }
     }
 
+    /**
+     * Updates ball position every frame
+     */
     public void update() {
         if (squeeze > 0) {
             --squeeze;
@@ -231,10 +326,20 @@ public class Ball extends Movable implements Collidable {
         }
     }
 
+    /**
+     * Gets position of the ball
+     *
+     * @return coordinates of center of the ball
+     */
     public Vector getCenter() {
         return new Vector(position.x + RADIUS, position.y + RADIUS);
     }
 
+    /**
+     * Gets position of the ball
+     *
+     * @return side of court where the ball is
+     */
     public Court.Side getSide() {
         return getCenter().x >= Court.MAX / 2 ? Court.Side.RIGHT : Court.Side.LEFT;
     }

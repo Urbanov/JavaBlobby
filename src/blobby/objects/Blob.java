@@ -3,28 +3,71 @@ package blobby.objects;
 import blobby.game.Player;
 import blobby.utils.Vector;
 
+/**
+ * Class representing a blob
+ */
 public class Blob extends Movable implements Controllable {
+    /**
+     * Radius of bottom circle
+     */
     public final static int BOTTOM_RADIUS = 330;
+
+    /**
+     * Radius of top circle
+     */
     public final static int TOP_RADIUS = 250;
+
+    /**
+     * Difference between centers of circles
+     */
     public final static int CENTER_DIFF = 310;
 
-    //FIXME
+    /**
+     * Where to spawn the blob vertically
+     */
     public final static int VERTICAL_SPAWN = 0;
-    public final static int LEFT_SPAWN = 2000;
-    public final static int RIGHT_SPAWN = 4500;
 
+    /**
+     * Where to spawn the ball horizontally on the left court
+     */
+    public final static int LEFT_SPAWN = Court.WIDTH / 4 - BOTTOM_RADIUS;
+
+    /**
+     * Where to spawn the ball horizontally on the right court
+     */
+    public final static int RIGHT_SPAWN = Court.WIDTH * 3 / 4 - BOTTOM_RADIUS;
+
+    /**
+     * How much the blob moves in a single frame
+     */
     public final static int HORIZONTAL_MOVE_DELTA = 45;
+
+    /**
+     * Value of vertical velocity after jumping
+     */
     public final static int JUMP_VELOCITY = 200;
+
+    /**
+     * Gravity value
+     */
     public final static int GRAVITY = 8;
 
     private Player owner;
 
+    /**
+     * Creates new blob
+     *
+     * @param owner {@link Player} who owns the ball
+     */
     public Blob(Player owner) {
         super(owner.getSide() == Court.Side.LEFT ? LEFT_SPAWN : RIGHT_SPAWN, VERTICAL_SPAWN,
             BOTTOM_RADIUS*2, BOTTOM_RADIUS + TOP_RADIUS + CENTER_DIFF);
         this.owner = owner;
     }
 
+    /**
+     * Checks whether blob is inside court and updates position accordingly
+     */
     @Override
     public void checkBounds() {
         // vertical check
@@ -52,6 +95,9 @@ public class Blob extends Movable implements Controllable {
         }
     }
 
+    /**
+     * Makes the blob jumo
+     */
     @Override
     public void moveUp() {
         if (onGround()) {
@@ -59,24 +105,43 @@ public class Blob extends Movable implements Controllable {
         }
     }
 
+    /**
+     * Moves blob to the left
+     */
     @Override
     public void moveLeft() {
         position.x -= HORIZONTAL_MOVE_DELTA;
     }
 
+    /**
+     * Moves blob to the right
+     */
     @Override
     public void moveRight() {
         position.x += HORIZONTAL_MOVE_DELTA;
     }
 
+    /**
+     * Updates blob position every frame
+     */
     public void update() {
         super.update(GRAVITY);
     }
 
+    /**
+     * Gets center of the bottom circle
+     *
+     * @return position of center
+     */
     public Vector getBottomCenter() {
         return new Vector(position.x + BOTTOM_RADIUS, position.y + BOTTOM_RADIUS);
     }
 
+    /**
+     * Gets center of the top circle
+     *
+     * @return position of center
+     */
     public Vector getTopCenter() {
         return new Vector(position.x + BOTTOM_RADIUS, position.y + BOTTOM_RADIUS + CENTER_DIFF);
     }

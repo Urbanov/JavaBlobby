@@ -14,7 +14,15 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Scene used for displaying a menu
+ */
 public class MenuScene extends SceneObject {
+    /**
+     * Creates new scene
+     *
+     * @param controller main controller
+     */
     public MenuScene(Controller controller) {
         Group root = new Group();
 
