@@ -1,11 +1,10 @@
 package blobby.game;
 
 import blobby.objects.Court;
-import blobby.objects.Net;
 
 public class Referee {
     public final static int WIN_POINTS = 3;
-    public final static int DIFF_WIN = 2;
+    public final static int WIN_DIFF = 2;
 
     private World world;
     private boolean ready;
@@ -31,12 +30,12 @@ public class Referee {
         }
     }
 
-    public boolean checkEnd() {
+    private boolean checkEnd() {
         int right_score = world.getRightPlayer().getScore();
         int left_score = world.getLeftPlayer().getScore();
         int diff = Math.abs(right_score - left_score);
 
-        if ((right_score >= WIN_POINTS || left_score >= WIN_POINTS) && diff >= DIFF_WIN) {
+        if ((right_score >= WIN_POINTS || left_score >= WIN_POINTS) && diff >= WIN_DIFF) {
             world.stop();
             return true;
         }
@@ -44,12 +43,12 @@ public class Referee {
         return false;
     }
 
-    public void nextRound() {
+    private void nextRound() {
         ready = true;
         world.getBall().reset(next_side);
     }
 
-    public void score() {
+    private void score() {
         ready = false;
         if (world.getBall().getSide() == Court.Side.RIGHT) {
             world.getLeftPlayer().score();

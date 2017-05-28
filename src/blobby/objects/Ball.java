@@ -12,7 +12,8 @@ public class Ball extends Movable implements Collidable {
     public final static int MAX_HITS = 3;
     public final static int GRAVITY = 3;
     public final static double DAMP = 0.45;
-    public final static double BLOB_VELOCITY_FACTOR = 0.2;
+    public final static double BUFF = 1.1;
+    public final static double BLOB_VELOCITY_FACTOR = 0.15;
     public final static int BOUNCE = 125;
     public final static int MINIMAL_VELOCITY = 40;
 
@@ -26,15 +27,15 @@ public class Ball extends Movable implements Collidable {
 
     public Ball() {
         //super(RIGHT_SPAWN, VERTICAL_SPAWN, RADIUS*2, RADIUS*2);
-        super(6000, 2540, RADIUS*2, RADIUS*2);
+        super(5500, 2000, RADIUS*2, RADIUS*2);
         waiting = true;
         valid = true;
         squeeze = 0;
 
 
-        /*//FIXME: debug
-        waiting = false;
-        velocity.y = 50;
+        //FIXME: debug
+        //waiting = false;
+        /*velocity.y = 50;
         velocity.x = -150;*/
     }
 
@@ -54,7 +55,7 @@ public class Ball extends Movable implements Collidable {
         setPosition(side == Court.Side.LEFT ? LEFT_SPAWN : RIGHT_SPAWN, VERTICAL_SPAWN);
     }
 
-    public boolean hit(Blob blob) {
+    private boolean hit(Blob blob) {
         if (squeeze != 0) {
             return false;
         }
@@ -73,7 +74,7 @@ public class Ball extends Movable implements Collidable {
         return false;
     }
 
-    public void hit() {
+    private void hit() {
         valid = false;
     }
 
@@ -109,7 +110,7 @@ public class Ball extends Movable implements Collidable {
             velocity = new Vector(blob.getTopCenter().x - new_pos.x, blob.getTopCenter().y - new_pos.y)
                 .perpendicularFixedLength(BOUNCE + extra_factor);
 
-            // additional horizontal speed for better gameplay
+            // additional horizontal speed after bouncing
             if (velocity.y < MINIMAL_VELOCITY) {
                 velocity.y = MINIMAL_VELOCITY;
             }
@@ -144,6 +145,9 @@ public class Ball extends Movable implements Collidable {
             if (hit(blob)) {
                 velocity.scale(DAMP);
             }
+
+            // buff horizontal velocity for better gameplay
+            velocity.x *= BUFF;
 
             // hacks for when ball is outside of field after collision
             if (position.x < Court.MIN || position.x > Court.MAX - width) {
