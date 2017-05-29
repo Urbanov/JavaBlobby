@@ -38,7 +38,6 @@ public class Vector {
         return Math.sqrt(x * x + y * y);
     }
 
-
     /**
      * Calculates distance to other point
      *

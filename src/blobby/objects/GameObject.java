@@ -25,7 +25,7 @@ public abstract class GameObject {
     }
 
     /**
-     * Sets object's position to desired coords
+     * Sets object position to desired coords
      *
      * @param posX horizontal position
      * @param posY vertical position

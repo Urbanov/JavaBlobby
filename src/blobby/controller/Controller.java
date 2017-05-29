@@ -32,6 +32,15 @@ public class Controller extends AnimationTimer {
     }
 
     /**
+     * Gets stage
+     *
+     * @return stage
+     */
+    public Stage getStage() {
+        return stage;
+    }
+
+    /**
      * Shows menu scene
      */
     public void showMenu() {

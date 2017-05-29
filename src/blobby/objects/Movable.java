@@ -40,6 +40,17 @@ public abstract class Movable extends GameObject {
     }
 
     /**
+     * Sets new velocity of the object
+     *
+     * @param x horizontal velocity
+     * @param y vertical velocity
+     */
+    public void setVelocity(int x, int y) {
+        velocity.x = x;
+        velocity.y = y;
+    }
+
+    /**
      * Updates position
      *
      * @param gravity value of gravity

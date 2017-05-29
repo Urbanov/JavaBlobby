@@ -128,6 +128,7 @@ public class Ball extends Movable implements Collidable {
         if (squeeze != 0) {
             return false;
         }
+
         squeeze = SQUEEZE;
 
         if (blob != last || waiting) {

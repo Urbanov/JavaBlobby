@@ -1,7 +1,7 @@
 package blobby.input;
 
-import blobby.objects.Ball;
 import blobby.game.Player;
+import blobby.objects.Ball;
 import blobby.objects.Blob;
 import blobby.objects.Net;
 import javafx.scene.input.KeyCode;
