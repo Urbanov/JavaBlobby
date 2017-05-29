@@ -88,7 +88,7 @@ public class Ball extends Movable implements Collidable {
     }
 
     /**
-     * Checks whether any player scored this round
+     * Checks whether current round has already ended, even if ball is still moving
      *
      * @return logical value
      */

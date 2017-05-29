@@ -2,6 +2,8 @@ package blobby.input;
 
 import blobby.objects.Ball;
 import blobby.game.Player;
+import blobby.objects.Blob;
+import blobby.objects.Net;
 import javafx.scene.input.KeyCode;
 
 /**
@@ -9,6 +11,7 @@ import javafx.scene.input.KeyCode;
  */
 public class BotInput extends Input {
     private Ball ball;
+    private Blob blob;
 
     /**
      * Creates new instance of input
@@ -19,6 +22,7 @@ public class BotInput extends Input {
     public BotInput(Player player, Ball ball) {
         super(player);
         this.ball = ball;
+        this.blob = player.getBlob();
     }
 
     /**
@@ -26,12 +30,49 @@ public class BotInput extends Input {
      */
     @Override
     public void update() {
-        //FIXME
+        // reset everything
         input.resetUp();
         input.resetLeft();
         input.resetRight();
-        //XD
-        input.setUp();
+
+        // ball is near our side
+        if (ball.minX() < Net.MAX + 400) {
+
+            // serve
+            if (ball.isWaiting()) {
+                input.setUp();
+            }
+
+            // follow the ball
+            else if (ball.isValid()) {
+                if (blob.minX() > ball.minX() + 200) {
+                    input.setLeft();
+                }
+                if (blob.minX() < ball.minX() + 400) {
+                    input.setRight();
+                }
+                if (ball.minY() < 4000) {
+                    input.setUp();
+                }
+            }
+        }
+
+        // position a bit to the left
+        else if (ball.isValid()) {
+            if (blob.minX() > 1500) {
+                input.setLeft();
+            }
+        }
+
+        // reposition after round
+        else {
+            if (blob.minX() > 1700) {
+                input.setLeft();
+            }
+            else if (blob.minX() < 1500) {
+                input.setRight();
+            }
+        }
     }
 
     /**
