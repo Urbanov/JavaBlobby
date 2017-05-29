@@ -231,7 +231,7 @@ public class Ball extends Movable implements Collidable {
                 position.y = blob.maxY();
                 update();
             }
-            else if (position.x >= Net.MIN - width && position.x <= Net.MAX) {
+            else if (position.x >= Net.MIN - width && position.x <= Net.MAX && position.y < Net.HEIGHT) {
                 position.y = blob.maxY() > Net.HEIGHT ? Net.HEIGHT : blob.maxY();
                 update();
             }

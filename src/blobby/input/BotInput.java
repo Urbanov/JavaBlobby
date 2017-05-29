@@ -45,13 +45,13 @@ public class BotInput extends Input {
 
             // follow the ball
             else if (ball.isValid()) {
-                if (blob.minX() > ball.minX() + 200) {
+                if (blob.minX() > ball.minX() - 200) {
                     input.setLeft();
                 }
-                if (blob.minX() < ball.minX() + 400) {
+                if (blob.minX() < ball.minX() - 400) {
                     input.setRight();
                 }
-                if (ball.minY() < 4000) {
+                if (ball.minY() < 3800) {
                     input.setUp();
                 }
             }
