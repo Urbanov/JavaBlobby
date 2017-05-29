@@ -44,10 +44,10 @@ public class RefereeTest {
 
     @Test
     public void newRoundShouldBeStarted() {
-        world.getBall().setPosition(Ball.RIGHT_SPAWN,0);
+        world.getBall().setPosition(Ball.RIGHT_SPAWN, 0);
         referee.work();
         assertEquals(Court.Side.LEFT, world.getBall().getSide());
-        world.getBall().setPosition(Ball.LEFT_SPAWN,0);
+        world.getBall().setPosition(Ball.LEFT_SPAWN, 0);
         referee.work();
         assertEquals(Court.Side.RIGHT, world.getBall().getSide());
     }
@@ -58,7 +58,7 @@ public class RefereeTest {
         for(int i = 0; i < 14; ++i) {
             world.getLeftPlayer().score();
         }
-        world.getBall().setPosition(Ball.RIGHT_SPAWN,0);
+        world.getBall().setPosition(Ball.RIGHT_SPAWN, 0);
         referee.work();
         assertFalse(world.isRunning());
     }
@@ -70,10 +70,10 @@ public class RefereeTest {
             world.getLeftPlayer().score();
             world.getRightPlayer().score();
         }
-        world.getBall().setPosition(Ball.LEFT_SPAWN,0);
+        world.getBall().setPosition(Ball.LEFT_SPAWN, 0);
         referee.work();
         assertTrue(world.isRunning());
-        world.getBall().setPosition(Ball.LEFT_SPAWN,0);
+        world.getBall().setPosition(Ball.LEFT_SPAWN, 0);
         referee.work();
         assertFalse(world.isRunning());
     }

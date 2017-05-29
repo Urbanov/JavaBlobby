@@ -90,7 +90,7 @@ public class BallTest {
             blob.setPosition(500, 500);
             ball.setPosition(600, 600);
             ball.checkCollision(blob);
-            for (int j = 0; j < 11; ++j) {
+            for (int j = 0; j < 10; ++j) {
                 ball.update();
             }
         }
