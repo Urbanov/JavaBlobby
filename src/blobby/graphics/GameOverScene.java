@@ -45,8 +45,8 @@ public class GameOverScene extends GameScene {
         HBox hbox = new HBox(40);
         hbox.setAlignment(Pos.CENTER);
         ImageView cup = new ImageView("cup.png");
-        Text text = new Text((winner.getSide().toString() + " wins!"));
-        text.setFont(Font.font("Roboto", 80));
+        Text text = new Text((winner.getSide().toString() + " player\nwins the match!"));
+        text.setFont(Font.font("Roboto", 60));
         text.setFill(Color.WHITE);
         hbox.getChildren().addAll(cup, text);
 
