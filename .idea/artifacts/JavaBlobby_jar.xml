@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JavaBlobby:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JavaBlobby_jar</output-path>
+    <root id="archive" name="JavaBlobby.jar">
+      <element id="module-output" name="JavaBlobby" />
+    </root>
+  </artifact>
+</component>
